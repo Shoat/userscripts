@@ -35,12 +35,10 @@ function addButtonAll() {
 }
 
 function clearTweets($col) {
-    $buttonOptions = $('a[data-action="options"]', $col);
-    $buttonOptions.trigger('click');
-    window.setTimeout(function ($col, $buttonOptions) {
-        $('button[data-action="clear"]', $col).trigger('click');
-        $buttonOptions.trigger('click');
-    }, 1000, $col, $buttonOptions);    
+    var cid = $col.attr('data-column');
+    var column = TD.controller.columnManager.get(cid);
+    column.clear();
+    $('#document').trigger('uiClearColumnAction', { columnId: cid });
 } 
 
 
